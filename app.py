@@ -12,7 +12,7 @@ def telemetry_updater():
     global x  # Declare x as global to modify it inside the function
     while True:
         telemetry.generate_telemetry(x)  # Corrected function call
-        time.sleep(2)  # Simulate sensor reading every 2 seconds
+        time.sleep(1)  # Simulate sensor reading every 2 seconds
         x += 10
 
 @app.route('/')
