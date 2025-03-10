@@ -1,16 +1,19 @@
-from flask import Flask, jsonify, render_template
-from telemetry_model import TelemetryModel
-import threading
-import time
+from flask import Flask, jsonify, render_template  # Flask framework for web application
+from telemetry_model import TelemetryModel  # Custom model for telemetry data
+import threading  # For running the telemetry updater in a separate thread
+import time  # For simulating sensor reading intervals
 
 app = Flask(__name__)
 telemetry = TelemetryModel()
+x = 0
 
 def telemetry_updater():
     """Continuously generates telemetry data."""
+    global x  # Declare x as global to modify it inside the function
     while True:
-        telemetry.generate_telemetry()
+        telemetry.generate_telemetry(x)  # Corrected function call
         time.sleep(2)  # Simulate sensor reading every 2 seconds
+        x += 10
 
 @app.route('/')
 def dashboard():
